@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Family Tree Diagram</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    .node circle {
+      fill: #999;
+    }
+    .node text {
+      font: 12px sans-serif;
+    }
+    .link {
+      fill: none;
+      stroke: #555;
+      stroke-width: 1.5px;
+    }
+  </style>
+</head>
+<body>
+  <svg width="960" height="600"></svg>
+  <script>
+const data = {
+  name: "Fundamental Analysis",
+  children: [
+    {
+      name: "Financial Statements",
+      children: [
+        {
+          name: "Balance Sheet",
+          children: [
+            {
+              name: "Assets",
+              children: [
+                {
+                  name: "Current Assets",
+                  children: [
+                    { name: "Cash and Cash Equivalents" },
+                    { name: "Accounts Receivable" },
+                    { name: "Inventory" },
+                    { name: "Prepaid Expenses" }
+                  ]
+                },
+                {
+                  name: "Non-Current Assets",
+                  children: [
+                    { name: "Property, Plant, and Equipment (PP&E)" },
+                    { name: "Intangible Assets" },
+                    { name: "Investments" },
+                    { name: "Deferred Tax Assets" }
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Liabilities",
+              children: [
+                {
+                  name: "Current Liabilities",
+                  children: [
+                    { name: "Accounts Payable" },
+                    { name: "Short-Term Debt" },
+                    { name: "Accrued Liabilities" },
+                    { name: "Unearned Revenue" }
+                  ]
+                },
+                {
+                  name: "Non-Current Liabilities",
+                  children: [
+                    { name: "Long-Term Debt" },
+                    { name: "Deferred Tax Liabilities" },
+                    { name: "Pension Liabilities" },
+                    { name: "Other Long-Term Liabilities" }
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Equity",
+              children: [
+                { name: "Common Stock" },
+                { name: "Retained Earnings" },
+                { name: "Additional Paid-In Capital" },
+                { name: "Treasury Stock" }
+              ]
+            }
+          ]
+        },
+        {
+          name: "Income Statement",
+          children: [
+            {
+              name: "Revenue",
+              children: [
+                { name: "Operating Revenue" },
+                { name: "Non-Operating Revenue" }
+              ]
+            },
+            {
+              name: "Expenses",
+              children: [
+                {
+                  name: "Operating Expenses",
+                  children: [
+                    { name: "Cost of Goods Sold (COGS)" },
+                    { name: "Selling, General, and Administrative Expenses (SG&A)" },
+                    { name: "Depreciation and Amortization" }
+                  ]
+                },
+                {
+                  name: "Non-Operating Expenses",
+                  children: [
+                    { name: "Interest Expense" },
+                    { name: "Taxes" }
+                  ]
+                }
+              ]
+            },
+            {
+              name: "Net Income",
+              children: [
+                { name: "Gross Profit" },
+                { name: "Operating Income" },
+                { name: "Net Income After Taxes" }
+              ]
+            }
+          ]
+        },
+        {
+          name: "Cash Flow Statement",
+          children: [
+            {
+              name: "Operating Activities",
+              children: [
+                { name: "Net Income" },
+                { name: "Depreciation and Amortization" },
+                { name: "Changes in Working Capital" }
+              ]
+            },
+            {
+              name: "Investing Activities",
+              children: [
+                { name: "Capital Expenditures (CapEx)" },
+                { name: "Investments in Securities" },
+                { name: "Acquisitions" }
+              ]
+            },
+            {
+              name: "Financing Activities",
+              children: [
+                { name: "Debt Issuance" },
+                { name: "Equity Issuance" },
+                { name: "Dividends Paid" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Ratios and Metrics",
+      children: [
+        {
+          name: "Liquidity Ratios",
+          children: [
+            { name: "Current Ratio" },
+            { name: "Quick Ratio" },
+            { name: "Cash Ratio" }
+          ]
+        },
+        {
+          name: "Profitability Ratios",
+          children: [
+            { name: "Gross Margin" },
+            { name: "Operating Margin" },
+            { name: "Net Profit Margin" },
+            { name: "Return on Assets (ROA)" },
+            { name: "Return on Equity (ROE)" }
+          ]
+        },
+        {
+          name: "Leverage Ratios",
+          children: [
+            { name: "Debt-to-Equity Ratio" },
+            { name: "Debt-to-Assets Ratio" },
+            { name: "Interest Coverage Ratio" }
+          ]
+        },
+        {
+          name: "Efficiency Ratios",
+          children: [
+            { name: "Asset Turnover Ratio" },
+            { name: "Inventory Turnover Ratio" },
+            { name: "Receivables Turnover Ratio" }
+          ]
+        },
+        {
+          name: "Valuation Ratios",
+          children: [
+            { name: "Price-to-Earnings Ratio (P/E)" },
+            { name: "Price-to-Book Ratio (P/B)" },
+            { name: "Price-to-Sales Ratio (P/S)" },
+            { name: "Dividend Yield" }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Qualitative Factors",
+      children: [
+        {
+          name: "Management Quality",
+          children: [
+            { name: "Experience and Track Record" },
+            { name: "Leadership Style" },
+            { name: "Corporate Culture" }
+          ]
+        },
+        {
+          name: "Industry Trends",
+          children: [
+            { name: "Market Growth" },
+            { name: "Technological Advancements" },
+            { name: "Regulatory Environment" }
+          ]
+        },
+        {
+          name: "Economic Conditions",
+          children: [
+            { name: "Inflation" },
+            { name: "Interest Rates" },
+            { name: "Unemployment Rate" },
+            { name: "Economic Growth (GDP)" }
+          ]
+        },
+        {
+          name: "Competitive Positioning",
+          children: [
+            { name: "Market Share" },
+            { name: "Brand Strength" },
+            { name: "Product Differentiation" },
+            { name: "Barriers to Entry" }
+          ]
+        },
+        {
+          name: "Corporate Governance",
+          children: [
+            { name: "Board of Directors" },
+            { name: "Shareholder Rights" },
+            { name: "Transparency and Disclosure" }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+
+
+    const width = 1600;
+    const height = 1200;
+    const svg = d3.select("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+    const root = d3.hierarchy(data);
+
+    const treeLayout = d3.tree().size([height, width - 160]);
+    treeLayout(root);
+
+    const links = svg.append("g")
+      .selectAll(".link")
+      .data(root.links())
+      .enter()
+      .append("path")
+      .attr("class", "link")
+      .attr("d", d3.linkHorizontal()
+        .x(d => d.y)
+        .y(d => d.x));
+
+    const nodes = svg.append("g")
+      .selectAll(".node")
+      .data(root.descendants())
+      .enter()
+      .append("g")
+      .attr("class", "node")
+      .attr("transform", d => `translate(${d.y},${d.x})`);
+
+    nodes.append("circle")
+      .attr("r", 5);
+
+    nodes.append("text")
+      .attr("dy", 3)
+      .attr("x", d => d.children ? -8 : 8)
+      .style("text-anchor", d => d.children ? "end" : "start")
+      .text(d => d.data.name);
+  </script>
+</body>
+</html>
